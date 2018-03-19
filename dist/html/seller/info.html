@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../../css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/custom.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/icon.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/public.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/layout.css" />
+		<title>账号信息</title>
+	</head>
+	<body>
+		<div class="page bgf">
+			<div class="info-wrapper">
+				<div class="form">
+					<div class="input-wrap">
+						<div class="text">姓名<em>*</em></div>
+						<input class="input" type="text" placeholder="请输入您的姓名" verify msg-empty="请输入您的姓名" />
+					</div>
+					<div class="input-wrap">
+						<div class="text">手机号<em>*</em></div>
+						<input id="mobile" class="input" type="number" placeholder="请输入您的手机号码" verify="phone" msg-empty="请输入您的手机号码" msg="手机号码格式不正确!" />
+					</div>
+					<div class="input-wrap">
+						<div class="text">商家名称<em>*</em></div>
+						<input class="input" type="text" placeholder="请输入商家名称" verify msg-empty="请输入商家名称" />
+					</div>
+					<div class="input-wrap">
+						<div class="text">产品描述<em>*</em></div>
+						<textarea class="input" type="text" placeholder="请输入产品描述" verify msg-empty="请输入产品描述" style="height: 100px;" ></textarea>
+					</div>
+				</div>
+				<a id="submit" href="javascript:;" class="btn btn-primary" style="margin-top: 30px;">修改</a>
+			</div>
+		</div>
+		
+		<script type="text/javascript" data-main="../../js/app" src="../../js/require.js" ></script>
+		<script type="text/javascript" src="../../js/app.js" ></script>
+		<script type="text/javascript">
+			requirejs(['jquery', 'lazyload', 'rem', 'tools'],
+				function($, lazyload, rem, t) {
+					
+					$(function () {
+						$('#submit').click(function() {
+							if(!t.validForm('body', 1)) return;
+						})
+					})
+				});
+		</script>
+	</body>
+</html>

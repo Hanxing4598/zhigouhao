@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../../css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/custom.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/icon.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/public.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/layout.css" />
+		<title>直购号</title>
+	</head>
+	<body>
+		<div class="page" style="bottom: 51px;">
+			<div class="category-wrapper">
+				<section id="content" class="content"></section>
+				<div id="empty" class="list" style="display: none;">
+					<div class="empty-wrap empty-data">
+						<img src="../../img/empty_data.png">
+						<p>暂无分类信息</p>
+					</div>
+				</div>
+				<div class="link-wrap">
+					<a id="new" href="javascript:;" class="link showModal">
+						<i class="iconfont icon-Addto-1"></i>新建分类
+					</a>
+				</div>
+			</div>
+		</div>
+		<div id="modal" class="pro-edit-list-modal modal-wrapper" style="display: none;">
+			<div class="mask"></div>
+			<div class="container">
+				<div class="content">
+					<div class="wrap">
+						<div class="title">分类名称</div>
+						<div class="select-wrap">
+							<input id="name" class="select" type="text" placeholder="请输入分类名称" />
+						</div>
+						<div id="sure" class="btn btn-primary">确定</div>
+					</div>
+					<div class="tc">
+						<i id="close" class="close-icon iconfont icon-cancel-"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script id="tpl_list_child_item" type="text/html">
+			<li class="item">
+				<div class="text">{{name}}</div>
+				<div class="operate">
+					<i class="edit iconfont icon-edit- showModal"></i>
+					<i class="delete iconfont icon-delete-"></i>
+				</div>
+			</li>
+		</script>
+		<script id="tpl_list_item" type="text/html">
+			<div class="item-wrap">
+				<ul class="list">
+					<li class="item">
+						<div class="text">{{name}}</div>
+						<div class="operate">
+							<i class="top iconfont icon-up-"></i>
+							<i class="edit iconfont icon-edit- showModal"></i>
+							<i class="delete iconfont icon-delete-"></i>
+						</div>
+					</li>
+				</ul>
+				<a href="javascript:;" class="add item showModal"><i class="iconfont icon-Addto-"></i>添加子分类</a>
+			</div>
+		</script>
+		
+		<script type="text/javascript" data-main="../../js/app" src="../../js/require.js" ></script>
+		<script type="text/javascript" src="../../js/app.js" ></script>
+		<script type="text/javascript">
+			requirejs(['jquery', 'lazyload', 'rem', 'tools'],
+				function($, lazyload, rem, t) {
+					$(function () {
+						var $content = $('#content'),
+							$currentEle = null,
+							currentChildIndex = -1,
+							name = $('#name')[0],
+							//记录点击是是分类还是子分类 0 => 新增一个分类   1=> 新增子分类  2=> 编辑
+							type = -1;
+						
+						var modal = t.showModal('#modal');
+						
+						refresh();
+						
+						$('.page').delegate('.showModal', 'click', modal.show);
+						
+						$content.delegate('.add', 'click', function () {
+							type = 1;
+							$currentEle = $(this).parent();
+						});
+						
+						$content.delegate('.edit', 'click', function () {
+							var $text = $(this).parent().prev();
+							type = 2;
+							currentChildIndex = $text.parent().index();
+							name.value = $text.text();
+							$currentEle = $(this).parents('.item-wrap');
+						});
+						
+						$content.delegate('.top', 'click', function () {
+							var $parents = $(this).parents('.item-wrap');
+							$content.find('.item-wrap').eq(0).before($parents)
+						})
+						
+						$content.delegate('.delete', 'click', function () {
+							var $parent = $(this).parents('.item');
+							t.alert({
+								msg: '你确定要删除该分类吗？',
+								isConfirm: true,
+								fn: function () {
+									tools.toast('删除成功');
+									if ($parent.index() == 0) {
+										$parent.parents('.item-wrap').remove();
+										refresh();
+									}else {
+										$parent.remove();
+									}
+								}
+							});
+						});
+						
+						$('#new').click(function () {
+							type = 0;
+						})
+						
+						$('#close').click(hide);
+						
+						$('#sure').click(function () {
+							name.value!='' ? sure() : t.toast('请输入分类名称^_^');
+						})
+						
+						function hide () {
+							name.value = '';
+							modal.hide();
+							refresh();
+						}
+						
+						function sure () {
+							type == 0 && addCategory();
+							type == 1 && addChildCategory();
+							type == 2 && editCategory();
+							hide();
+						}
+						
+						function addCategory () {
+							var html = $('#tpl_list_item').html().replace(/{{name}}/, name.value);
+							$content.append($(html));
+						}
+						
+						function addChildCategory () {
+							var html = $('#tpl_list_child_item').html().replace(/{{name}}/, name.value);
+							$currentEle.find('.list').append($(html));
+						}
+						
+						function editCategory () {
+							$currentEle.find('.list').find('.item').eq(currentChildIndex).find('.text').text(name.value);
+						}
+						
+						/* 刷新视图 */
+						function refresh () {
+							var length = $content.find('.item-wrap').length;
+							
+							if (length <= 0) {
+								$('#empty').show();
+							}else {
+								$('#empty').hide();
+							}
+						}
+					})
+				});
+		</script>
+	</body>
+</html>

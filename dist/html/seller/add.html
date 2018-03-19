@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../../css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/custom.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/icon.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/public.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/layout.css" />
+		<title>添加商品</title>
+		<style type="text/css">
+			.btn {
+				width: auto;
+				margin: 34px 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="page">
+			<div class="add-wrapper">
+				<div class="form">
+					<div class="input-wrap">
+						<div class="text">添加商品图片<em>*</em></div>
+						<div class="pic-wrap">
+							<ul id="piclist" class="list">
+								<li class="item upload">
+									<div class="img-wrap">
+										<img class="img" src="../../img/replace/upload.png"/>
+										<input id="upload" class="file" type="file" value="" accept="image/*" />
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="input-wrap">
+						<div class="text">商品名称<em>*</em></div>
+						<input class="input" type="text" placeholder="请输入商品名称" verify msg-empty="请输入商品名称" />
+					</div>
+					<div class="input-wrap">
+						<div class="text">原价<em>*</em></div>
+						<input class="input" type="decimal" placeholder="请输入原价" verify="decimal" msg-empty="请输入商品原价" msg="请输入正确的价格！" /><span class="unit fr">元</span>
+					</div>
+					<div class="input-wrap" style="margin-bottom: 20px;">
+						<div class="text">商品分类<em>*</em></div>
+						<select class="input" verify msg-empty="请选择商品分类" >
+							<option value="">请选择商品分类</option>
+							<option value="0">分类1</option>
+							<option value="1">分类2</option>
+							<option value="2">分类3</option>
+						</select>
+						<i class="arrow iconfont icon-drop-down-"></i>
+					</div>
+					<div class="mar"></div>
+					<div class="input-wrap">
+						<div class="text">现价<em>*</em></div>
+						<input class="input" type="decimal" placeholder="请输入现价" verify="decimal" msg-empty="请输入商品现价" msg="请输入正确的价格!" /><span class="unit fr">元</span>
+					</div>
+					<div class="input-wrap">
+						<div class="text">库存<em>*</em></div>
+						<input class="input" type="number" placeholder="请输入现价" verify="number" msg-empty="请输入商品库存" msg="库存数量必须为数字" />
+					</div>
+					<div class="tips">注 : 更多规格请到电脑端操作，登录网址 https://zhigouhao.baimuv.com</div>
+					<div class="mar"></div>
+					<div class="input-wrap">
+						<div class="text">详情<em>*</em></div>
+						<a id="edit-detail" href="javascript:;">
+							<input class="input" type="number" placeholder="点击进入编辑详情" readonly onfocus="this.blur()" /><i class="arrow iconfont icon-details-"></i>
+						</a>
+					</div>
+					<div class="input-wrap">
+						<div class="text">邮费<em>*</em></div>
+						<div id="fee" class="fee-wrap">
+							<div id="fee1" class="fee-item active">
+								<span class="sel-icon"></span>
+								<div class="fee-text">
+									<input type="number" value="" placeholder="满多少件包邮" verify="decimal" msg-empty="请输入运费！" msg-empty="请输入正确的金额" />
+									<span>件起包邮</span>
+								</div>
+							</div>
+							<div id="fee2" class="fee-item">
+								<span class="sel-icon"></span>
+								<div class="fee-text">
+									<input type="number" value="" placeholder="统一运费"  msg-empty="请输入运费！" msg-empty="请输入正确的金额"/>
+									<span>元</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<a id="submit" href="javascript:;" class="btn btn-primary">确定上传商品</a>
+		</div>
+		
+		<!-- 编辑详情 S -->
+		<div id="detail-page" class="page pro-detail-wrapper-page" style="overflow-x: hidden; display: none; z-index: 99;">
+			<div class="mask"></div>
+			<div id="wrapper" class="pro-detail-wrapper">
+				<div id="picWrapper" class="pic-wrap">
+					<div class="pic">
+						<img class="img" src="../../img/replace/detail_img1.png" />
+						<div class="operate">
+							<div class="item delete">
+								<i class="iconfont icon-delete-"></i>删除
+							</div>
+							<div class="item topmove">
+								<i class="iconfont icon-up-"></i>上移
+							</div>
+							<div class="item insert">
+								<i class="iconfont icon-Addto-"></i>插入
+								<input class="file" type="file" accept="image/*" data-type="item" />
+							</div>
+						</div>
+					</div>
+					<div class="pic">
+						<img class="img" src="../../img/replace/detail_img2.png" />
+						<div class="operate">
+							<div class="item delete">
+								<i class="iconfont icon-delete-"></i>删除
+							</div>
+							<div class="item topmove">
+								<i class="iconfont icon-up-"></i>上移
+							</div>
+							<div class="item insert">
+								<i class="iconfont icon-Addto-"></i>插入
+								<input class="file" type="file" accept="image/*" data-type="item" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="btn-wrap">
+					<div class="btn save">
+						添加图片
+						<input class="file" type="file" accept="image/*" />
+					</div>
+					<a id="save" href="javascript:;" class="btn btn-primary">提交保存</a>
+				</div>
+			</div>
+		</div>
+		<script id="tpl_pic" type="text/html">
+			<div class="pic">
+				<img class="img" src="{{src}}" />
+				<div class="operate">
+					<div class="item delete">
+						<i class="iconfont icon-delete-"></i>删除
+					</div>
+					<div class="item topmove">
+						<i class="iconfont icon-up-"></i>上移
+					</div>
+					<div class="item insert">
+						<i class="iconfont icon-Addto-"></i>插入
+						<input class="file" type="file" accept="image/*" data-type="item" />
+					</div>
+				</div>
+			</div>
+		</script>
+		<!-- 编辑详情 E -->
+		<script id="tpl_upload" type="text/html" >
+			<li class="item">
+				<div class="img-wrap">
+					<img class="img" src="{{src}}" />
+					<span class="close expand"></span>
+				</div>
+			</li>
+		</script>
+		
+		<script type="text/javascript" data-main="../../js/app" src="../../js/require.js" ></script>
+		<script type="text/javascript" src="../../js/app.js" ></script>
+		<script type="text/javascript">
+			requirejs(['jquery', 'lazyload', 'rem', 'tools'],
+				function($, lazyload, rem, t) {
+					$(function () {
+						var $submit = $('#submit'),
+							$upload = $('#upload'),
+							$fee1 = $('#fee1'), //运费方式1
+							$fee2 = $('#fee2'), //运费方式2
+							$piclist = $('#piclist'),
+							$detailPage = $('#detail-page'),
+							$editDetail = $('#edit-detail'),
+							isConfirm = false,
+							count = 0;
+
+						$fee1.click(function () {
+							$fee1.addClass('active').find('input').attr('verify', 'decimal');
+							$fee2.removeClass('active').find('input').removeAttr('verify');
+						})
+						
+						$fee2.click(function () {
+							$fee2.addClass('active').find('input').attr('verify', 'decimal');
+							$fee1.removeClass('active').find('input').removeAttr('verify');
+						})
+						
+						$submit.click(function () {
+							if (!isUploaded()) {
+								t.toast('请至少上传一张图片！');
+								return;
+							}
+							if (!t.validForm('body', 1)) return;
+							
+							t.toast('上传商品成功!');
+							isConfirm = true;
+							setTimeout(function () {
+								window.location.href = 'pro_manager.html';
+							}, 2000)
+						})
+						
+						//执行enter动画
+						$editDetail.click(enter)
+						
+						$upload.change(function () {
+							var fileSize=10*1024*1024;
+							var files = this.files[0];
+							var _this = this;
+							
+							if(!/\.(gif|png|jpeg|JPEG|jpg|GIF|PNG|JPG)$/.test(files.name)){
+					            alert('请从相册选择图片或者直接拍照上传');
+					            source.value = "";
+					            return false;
+					        }
+							
+							if(files.size>fileSize){
+								t.alert({
+									msg: '照片过大，请上传10M以下的照片',
+									icon: true
+								});
+								return false;
+							}
+							
+							var reader = new FileReader();
+							reader.readAsDataURL(files);
+							reader.onload = function (e) {
+								var _html = $('#tpl_upload').html().replace('{{src}}', this.result);
+								$(_this).parents('.item').before($(_html));
+								//上传成功
+								count++;
+								refresh();
+							}
+						})
+						$piclist.delegate('.close', 'click', function () {
+							$(this).parents('.item').remove()
+							count--;
+							refresh();
+						})
+						
+						$detailPage[0].addEventListener('animationend', function () {
+							var $this = $(this);
+							if ($this.hasClass('move-leave')) {
+								$this.hide()
+							}
+						})
+						
+						//提示
+						$(window).bind('beforeunload', function(){
+							if (!isConfirm) return '信息尚未保存，确定要离开吗？';
+						});
+						
+						function isUploaded () {
+							return $piclist.find('.item').length > 1;
+						}
+						
+						function enter() {
+							$detailPage.show().addClass('move-enter').removeClass('move-leave');
+						}
+						
+						function leave() {
+							$detailPage.removeClass('move-enter').addClass('move-leave');
+						}
+						
+						function refresh() {
+							var $upload = $piclist.find('li.upload')
+							if (count >= 3) $upload.hide()
+							else $upload.show()
+						}
+						
+						//此处为编辑商品详情代码...
+						(function () {
+							var $wrapper = $('#wrapper'),
+							$picWrapper = $('#picWrapper'),
+							$save = $('#save');
+							
+							$wrapper.delegate('.delete', 'click', function () {
+								//删除
+								var $this = $(this);
+								t.alert({
+									msg: '你确定要删除该商品图吗？',
+									isConfirm: true,
+									fn: function () {
+										t.toast('删除成功');
+										$this.parents('.pic').remove();
+									}
+								})
+							})
+							$wrapper.delegate('.topmove', 'click', function () {
+								//上移
+								var $ele1 = $(this).parents('.pic'),
+									$ele2 = $ele1.prev();
+								$ele1[0].addEventListener('webkitTransitionEnd', function () {
+									$ele2.before($ele1);
+									reset($ele1);
+								})
+								move($ele1);
+							})
+							$wrapper.delegate('.file', 'change', function () {
+								var $this = $(this),
+									_type = $this.data('type'),
+									_html = '',
+									fileSize = 10*1024*1024,
+									files = this.files[0],
+									_this = this;
+								
+								if(!/\.(gif|png|jpeg|JPEG|jpg|GIF|PNG|JPG)$/.test(files.name)){
+						            alert('请从相册选择图片或者直接拍照上传');
+						            source.value = "";
+						            return false;
+						        }
+								
+								if(files.size>fileSize){
+									alert('照片过大，请上传10M以下的照片');
+									return false;
+								}
+								
+								var reader = new FileReader();
+								reader.readAsDataURL(files);
+								reader.onload = function (e) {
+									var _html = $('#tpl_pic').html().replace('{{src}}', this.result);
+									if (_type) {
+										$this.parents('.pic').after($(_html));
+									} else {
+										$picWrapper.append($(_html));
+									}
+								}
+							})
+							
+							$save.click(function () {
+								t.toast('保存成功!');
+								setTimeout(function () {
+									//执行leave动画
+									leave();
+								}, 2000)
+							})
+							
+							function move (ele) {
+								ele.css('transform', 'translate3d(0, -100%, 0)');
+							}
+							
+							function reset (ele) {
+								ele.css('transform', 'translate3d(0, 0, 0)');
+							}
+						})()
+					})
+				});
+		</script>
+	</body>
+</html>

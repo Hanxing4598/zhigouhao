@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../../css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/custom.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/icon.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/public.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/layout.css" />
+		<title>直购号</title>
+	</head>
+
+	<body>
+		<div class="page">
+			<div class="reply-cash-wrapper">
+				<div class="header">申请提现金额</div>
+				<div class="form">
+					<div class="input-wrap">
+						<div class="text">银行<em>*</em></div>
+						<select class="input" type="text" verify msg-empty="请选择银行" >
+							<option value="">请选择银行</option>
+							<option value="0">银行卡1</option>
+							<option value="1">银行卡2</option>
+							<option value="2">银行卡3</option>
+						<select>
+						<i class="arrow iconfont icon-drop-down-"></i>
+					</div>
+					<div class="input-wrap">
+						<div class="text">银行卡号<em>*</em></div>
+						<input class="input" type="text" placeholder="请输入您的银行卡号" verify="bank" msg-empty="请输入您的银行卡号" msg="银行卡号格式不正确" />
+					</div>
+					<div class="input-wrap">
+						<div class="text">姓名<em>*</em></div>
+						<input class="input" type="text" placeholder="请输入您的姓名" verify msg-empty="请输入您的姓名" />
+					</div>
+					<div class="input-wrap">
+						<div class="text">身份证号<em>*</em></div>
+						<input class="input" type="text" placeholder="请输入您的身份证号" verify="ID" msg-empty="请输入您的身份证号" msg="身份证不合法!" />
+					</div>
+					<div class="input-wrap">
+						<div class="text">手机号<em>*</em></div>
+						<input id="mobile" class="input" type="number" placeholder="请输入您的手机号码" verify="phone" msg-empty="请输入您的手机号码" msg="手机号码格式不正确!" />
+					</div>
+					<div class="input-wrap code">
+						<div class="text">验证码<em>*</em></div>
+						<input class="input" type="text" placeholder="请输入验证码" verify msg-empty="请输入验证码" />
+						<input id="send-code" type="button" class="btn" value="发送验证码" />
+					</div>
+				</div>
+				<a id="submit" href="javascript:;" class="btn btn-primary">马上注册</a>
+			</div>
+		</div>
+
+		<script type="text/javascript" data-main="../../js/app" src="../../js/require.js"></script>
+		<script type="text/javascript" src="../../js/app.js"></script>
+		<script type="text/javascript">
+			requirejs(['jquery', 'lazyload', 'rem', 'tools'],
+				function($, lazyload, rem, t) {
+					$(function() {
+						t.sendSms('#send-code', {
+							time: 60,
+							color: 'transparent',
+							number: '#mobile',
+							disabledcolor: 'transparent',
+							mode: 1
+						});
+						
+						$('#submit').click(function() {
+							if(!t.validForm('body', 1)) return;
+							
+							//
+							t.toast('提现成功！');
+							setTimeout(function () {
+								window.location.href = 'income.html';
+							}, 2000)
+						})
+					})
+				});
+		</script>
+	</body>
+
+</html>

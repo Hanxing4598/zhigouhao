@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../../css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/custom.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/swiper.min.css"/>
+		<link rel="stylesheet" type="text/css" href="../../css/icon.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/public.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/layout.css" />
+		<title>直购号</title>
+		
+		<style type="text/css">
+			.page {
+				top: 44px;
+				bottom: 50px;
+			}
+			.tab .item.active {
+				color: #f96e53;
+			}
+			.tab .item.active::after {
+				width: 75px;
+				margin-left: -37.5px;
+				height: 2px;
+				background-color: #f96e53;
+			}
+			.img-100 {
+				margin-top: 5px;
+			}
+			.img-100 img {
+				display: block;
+				width: 100%;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="tab" class="tab">
+			<a data-id="pro" href="javascript:;" class="item active">商品</a>
+			<a data-id="detail" href="javascript:;" class="item">详情</a>
+		</div>
+		<div class="page">
+			<div class="detail-wrapper">
+				<div class="tab-content">
+					<section id="pro" class="tab-content-item">
+						<div id="swiper" class="swiper-container">
+							<div class="swiper-wrapper">
+								<div class="swiper-slide">
+									<img class="swiper-lazy" data-src="../../img/replace/图层 898.png" src="../../img/placehold_img2.jpg" />
+								</div>
+								<div class="swiper-slide">
+									<img class="swiper-lazy" data-src="../../img/replace/图层 898.png" src="../../img/placehold_img2.jpg" />
+								</div>
+								<div class="swiper-slide">
+									<img class="swiper-lazy" data-src="../../img/replace/图层 898.png" src="../../img/placehold_img2.jpg" />
+								</div>
+								<div class="swiper-slide">
+									<img class="swiper-lazy" data-src="../../img/replace/图层 898.png" src="../../img/placehold_img2.jpg" />
+								</div>
+							</div>
+							<div class="swiper-pagination"></div>
+						</div>
+						<div class="block-info">
+							<div class="info">
+								<p class="name">传统糕点礼盒手工点心特产糕点</p>
+								<p class="text"><span class="price">46.59</span><span class="oldprice">84.7</span><span class="discount">5.5折</span><span class="fee">满3件包邮</span></p>
+							</div>
+							<div class="right">
+								<div class="item sell tc">
+									<p class="text">总销量</p>
+									<p class="text">1220</p>
+								</div>
+								<div id="favorite" class="item collect tc">
+									<!-- 点亮状态使用on 类 -->
+									<p class="favorite iconfont icon-Collection-1"></p>
+									<p class="text">收藏</p>
+								</div>
+							</div>
+						</div>
+						<div class="block-number clearfix">
+							<p class="text fl">购买数量</p>
+							<div class="control-wrap fr">
+								<i id="minus" class="iconfont icon-reduce-"></i>
+								<input id="number" class="input" type="number" value="1" />
+								<i id="add" class="iconfont icon-plus-"></i>
+							</div>
+						</div>
+						
+						<!-- 未选择收货地址 -->
+						<div class="block-address no">
+							<div class="add">
+								<i class="add-icon iconfont icon-Addto-1"></i>添加收货地址
+							</div>
+							<i class="arrow iconfont icon-details-"></i>
+						</div>
+						
+						<!-- 已选择收货地址 -->
+						<div class="block-address">
+							<div class="address-info">
+								<div class="clearfix">
+									<p class="name fl">收货人：疯狂的三叶草</p>
+									<p class="phone fr">13760212507</p>
+								</div>
+								<p class="address">广东省深圳市南山区大学城创意园A栋</p>
+							</div>
+							<i class="arrow iconfont icon-details-"></i>
+						</div>
+					</section>
+					<section id="detail" class="tab-content-item img-100" style="display: none;">
+						<img class="lazyload" src="../../img/replace/detail_img1.png" />
+						<img class="lazyload" src="../../img/replace/detail_img2.png" />
+					</section>
+				</div>
+			</div>
+		</div>
+		<div class="detail-wrapper">
+			<div class="bottom">
+				<!-- 点亮状态使用on 类 -->
+				<div id="thumb-up" class="icon-wrap" data-up="0">
+					<i class="thumb-up iconfont icon-Fabulous-"></i>
+					<p id="count" class="text">点赞</p>
+					<p class="count">+1</p>
+				</div>
+				<a href="tel:131111111111" class="icon-wrap">
+					<i class="iconfont icon-iPhone-"></i>
+					<p class="text">联系商家</p>
+				</a>
+				<a href="#" class="btn btn-primary">立即购买</a>
+			</div>
+		</div>
+		
+		<script type="text/javascript" data-main="../../js/app" src="../../js/require.js" ></script>
+		<script type="text/javascript" src="../../js/app.js" ></script>
+		<script type="text/javascript">
+			requirejs(['jquery', 'lazyload', 'rem', 'tools', '../../js/lib/swiper-3.4.2.min.js'],
+				function($, lazyload, rem, t, Swiper) {
+					const CELLECT_CLASS = {
+						on: 'icon-Collection-2',
+						off: 'icon-Collection-'
+					},
+					THUMB_CLASS = {
+						on: 'icon-Fabulous-1',
+						off: 'icon-Fabulous-'
+					};
+					var $num = $('#number'),
+						$count = $('#count');
+					new Swiper('#swiper', {
+						loop: true,
+						autoplay: 3000,
+						pagination: '.swiper-pagination',
+						autoplayDisableOnInteraction: false,
+						lazyLoading: true
+					});
+					
+					$('#tab').find('.item').click(function (e) {
+						var $this = $(this),
+							id = $this.data('id');
+							
+						$this.addClass('active').siblings().removeClass('active');
+						$('.tab-content-item').hide();
+						$('#'+id).show();
+					});
+					
+					$('#favorite').click(function () {
+						//收藏
+						var $this = $(this);
+						
+						if ($this.hasClass('on')) {
+							//取消收藏操作
+							$this.removeClass('on');
+							$this.find('.favorite').removeClass(CELLECT_CLASS.on).addClass(CELLECT_CLASS.off);
+							t.toast('取消收藏成功');
+						}else {
+							//收藏操作
+							$this.addClass('on');
+							$this.find('.favorite').removeClass(CELLECT_CLASS.off).addClass(CELLECT_CLASS.on);
+							t.toast('收藏成功');
+						}
+					});
+					
+					$('#thumb-up').click(function () {
+						//点赞
+						var $this = $(this),
+							up = $this.data('up');
+						
+						if ($this.hasClass('on')) {
+							//取消点赞操作
+							$count.text('点赞');
+							$this.removeClass('on move');
+							$this.find('.thumb-up').removeClass(THUMB_CLASS.on).addClass(THUMB_CLASS.off);
+						}else {
+							//点赞操作(假设999, 后台计算)
+							$count.text(999);
+							$this.addClass('on move');
+							$this.find('.thumb-up').removeClass(THUMB_CLASS.off).addClass(THUMB_CLASS.on);
+						}
+					});
+					
+					//+ - 商品
+					$('#add').click(function() {
+						var num = $num.val();
+						$num.val(++num);
+					})
+					$('#minus').click(function() {
+						var num = $num.val();
+						$num.val(Math.max(1, --num));
+					})
+				});
+		</script>
+	</body>
+</html>

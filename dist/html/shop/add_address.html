@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../../css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/custom.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.picker.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/icon.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/public.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/layout.css" />
+		<title>添加收货地址</title>
+		<style type="text/css">
+			.set-default {
+				display: inline-block;
+				margin: 20px 0;
+				line-height: 18px;
+				padding-left: 28px;
+				color: #333;
+			}
+			
+			.btn {
+				width: auto;
+				margin: 30px 20px;
+			}
+			
+			.pos {
+				position: absolute;
+				top: 20px;
+				line-height: 16px;
+				right: 0;
+				color: #e7413c;
+			}
+			
+			.pos .iconfont {
+				display: inline-block;
+				vertical-align: top;
+				font-size: 16px;
+				margin-right: 6px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="page bgf">
+			<div class="add-wrapper">
+				<div class="form">
+					<div class="input-wrap">
+						<div class="text">收货人<em>*</em></div>
+						<input class="input" type="text" placeholder="请输入收货人" verify msg-empty="请输入收货人" />
+					</div>
+					<div class="input-wrap">
+						<div class="text">手机号<em>*</em></div>
+						<input class="input" type="number" placeholder="请输入手机号" verify="phone" msg-empty="请输入手机号" msg="手机号码格式不正确" />
+					</div>
+					<div class="input-wrap">
+						<div class="text">地区<em>*</em></div>
+						<a href="javascript:;">
+							<input id="address" class="input" type="text" placeholder="请选择所在地区" readonly onfocus="this.blur()" verify msg-empty="请选择所在地区" /><i class="arrow iconfont icon-drop-down-"></i>
+						</a>
+					</div>
+					<div class="input-wrap">
+						<div class="text">详细地址<em>*</em></div>
+						<a href="javascript:;">
+							<input class="input" type="text" placeholder="请输入详细地址" verify msg-empty="请输入详细地址" />
+						</a>
+						<a href="javascript:;" class="pos"><i class="iconfont icon-Location-"></i>获取定位</a>
+					</div>
+					<div class="input-wrap">
+						<div class="text">邮政编码<em>*</em></div>
+						<a href="javascript:;">
+							<input class="input" type="text" placeholder="请输入邮政编码" verify msg-empty="请输入邮政编码" />
+						</a>
+					</div>
+					<a id="setDefault" href="javascript:;" class="set-default">设置默认地址</a>
+				</div>
+			</div>
+			<a id="submit" href="javascript:;" class="btn btn-primary">提交保存</a>
+		</div>
+
+		<script type="text/javascript" data-main="../../js/app" src="../../js/require.js"></script>
+		<script type="text/javascript" src="../../js/app.js"></script>
+		<script src="../../js/lib/mui.min.js"></script>
+		<script src="../../js/lib/mui.picker.min.js"></script>
+		<script src="../../js/lib/data.city.js"></script>
+		<script type="text/javascript">
+			requirejs(['jquery', 'lazyload', 'rem', 'tools'],
+				function($, lazyload, rem, t) {
+					$('#setDefault').click(function() {
+						$(this).toggleClass('on')
+					})
+
+					$('#submit').click(function() {
+						if(!t.validForm('body', 1)) return;
+					})
+
+					var $address = $('#address'),
+						city_picker = new mui.PopPicker({
+							layer: 3
+						});
+					$('#submit').click(function() {
+						if(!t.validForm('body', 1)) return;
+					})
+
+					//选择省市区
+					city_picker.setData(init_city_picker);
+					$address.on("tap", function() {
+						city_picker.show(function(items) {
+							$address.val((items[0] || {}).text + (items[1] || {}).text + (items[2] || {}).text);
+						});
+					});
+				});
+		</script>
+	</body>
+
+</html>

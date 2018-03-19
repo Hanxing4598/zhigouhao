@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../../css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/custom.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/icon.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/public.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/layout.css" />
+		<title>我的订单</title>
+		<style type="text/css">
+			.page {
+				top: 44px;
+			}
+			.tab {
+				border-bottom: 1px solid #e8e8e8;
+			}
+			.tab .item.active {
+				color: #ed232e;
+			}
+			.tab .item.active::after {
+				height: 2px;
+				background-color: #ed232e;
+			}
+			.tab .item {
+				color: #888;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="tab">
+			<a href="javascript:;" class="item active">待付款</a>
+			<a href="javascript:;" class="item">待发货</a>
+			<a href="javascript:;" class="item">待收货</a>
+			<a href="javascript:;" class="item">已关闭</a>
+			<a href="javascript:;" class="item">已完成</a>
+		</div>
+		<div id="wrapper" class="page">
+			<ul class="order-wrapper">
+				<li class="top-wrapper">
+					<div class="order-head-item clearfix">
+						<div class="number fl">订单编号:123456789</div>
+						<div class="price fr">待支付</div>
+					</div>
+					<div class="item">
+						<div class="img">
+							<img class="lazyload" data-original="../../img/replace/图层 898.png" src="../../img/placehold_img.jpg" />
+						</div>
+						<div class="text">
+							<div class="title over_2">榴芒事迹椰子饼厦门鼓浪屿特产手工馅饼烘焙糕点小吃零食伴手礼</div>
+							<section class="clearfix">
+								<div class="price fl"><em>￥</em>64</div>
+								<div class="fr num">x1</div>
+							</section>
+						</div>
+					</div>
+					<div class="item">
+						<div class="img">
+							<img class="lazyload" data-original="../../img/replace/图层 898.png" src="../../img/placehold_img.jpg" />
+						</div>
+						<div class="text">
+							<div class="title over_2">榴芒事迹椰子饼厦门鼓浪屿特产手工馅饼烘焙糕点小吃零食伴手礼榴芒事迹椰子饼厦门鼓浪屿特产手工馅饼烘焙糕点小吃零食伴手礼</div>
+							<section class="clearfix">
+								<div class="price fl"><em>￥</em>64</div>
+								<div class="fr num">x1</div>
+							</section>
+						</div>
+					</div>
+					<div class="total tr">共1件商品 合计：<span class="price">￥192.00</span></div>
+					<div class="btns">
+						<a href="tel:13111111111" class="item gray-border fl">联系商家</a>
+						<div class="fr">
+							<a href="javascript:;" class="item gray-border cancel-hook">取消订单</a>
+							<a href="#" class="item price">立即支付</a>
+						</div>
+					</div>
+				</li>
+				<li class="top-wrapper">
+					<div class="order-head-item clearfix">
+						<div class="number fl">订单编号:123456789</div>
+						<div class="price fr">待支付</div>
+					</div>
+					<div class="item">
+						<div class="img">
+							<img class="lazyload" data-original="../../img/replace/图层 898.png" src="../../img/placehold_img.jpg" />
+						</div>
+						<div class="text">
+							<div class="title over_2">榴芒事迹椰子饼厦门鼓浪屿特产手工馅饼烘焙糕点小吃零食伴手礼</div>
+							<section class="clearfix">
+								<div class="price fl"><em>￥</em>64</div>
+								<div class="fr num">x1</div>
+							</section>
+						</div>
+					</div>
+					<div class="total tr">共1件商品 合计：<span class="price">￥192.00</span></div>
+					<div class="btns">
+						<a href="tel:13111111111" class="item gray-border fl">联系商家</a>
+						<div class="fr">
+							<a href="javascript:;" class="item gray-border cancel-hook">取消订单</a>
+							<a href="#" class="item price">立即支付</a>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+		
+		<script type="text/javascript" data-main="../../js/app" src="../../js/require.js" ></script>
+		<script type="text/javascript" src="../../js/app.js" ></script>
+		<script type="text/javascript">
+			requirejs(['jquery', 'lazyload', 'rem', 'tools'],
+				function($, lazyload, rem, t) {
+					var $wrapper = $('#wrapper');
+					$wrapper.on('click', '.cancel-hook', cancelClick);
+					$wrapper.on('click', '.delete-hook', deleteClick);
+					$wrapper.on('click', '.note-hook', noteClick);
+					$('.tab').find('.item').click(itemclick);
+					
+					t.lazyload('.page');
+	
+					/* 取消订单按钮点击 */
+					function cancelClick() {
+						t.alert({
+							msg: '你确定要取消该订单吗？',
+							isConfirm: true,
+							fn: function () {
+								//请使用t.post('', {}, function () {}, true)发送请求
+								t.toast('取消成功')
+							}
+						});
+					}
+	
+					/* 删除订单按钮点击 */
+					function deleteClick() {
+						t.alert({
+							msg: '你确定要删除该订单吗？',
+							isConfirm: true,
+							fn: function () {
+								//请使用t.post('', {}, function () {}, true)发送请求
+							}
+						});
+					}
+	
+					/* 提醒发货按钮点击 */
+					function noteClick() {
+						t.toast('提醒成功');
+						this.innerHTML = '已提醒';
+					}
+					
+					function itemclick() {
+						if ($(this).hasClass('active')) return;
+						$(this).addClass('active').siblings().removeClass('active');
+					}
+				});
+		</script>
+	</body>
+</html>

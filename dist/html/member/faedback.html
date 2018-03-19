@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../../css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/custom.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/icon.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/public.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/layout.css" />
+		<title>直购号</title>
+		
+		<style type="text/css">
+			.add-wrapper .input-wrap .input.textarea {
+				border: 1px solid #e8e8e8; border-radius: 5px;padding: 10px; margin-top: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="page">
+			<div class="add-wrapper">
+				<div class="form">
+					<div class="input-wrap">
+						<div class="text">标题<em>*</em></div>
+						<input class="input" type="text" placeholder="请简单概括问题或意见" verify msg-empty="请输入反馈标题" />
+					</div>
+					<div class="input-wrap" style="border-bottom: none;">
+						<div class="text">内容<em>*</em></div>
+						<textarea class="input textarea" rows="5" type="text" placeholder="请描述您要反馈的已经或内容" verify msg-empty="请描述您要反馈的已经或内容" ></textarea>
+					</div>
+					<div class="input-wrap">
+						<div class="text">图片<em></em></div>
+						<div class="pic-wrap">
+							<ul id="piclist" class="list">
+								<li class="item upload">
+									<div class="img-wrap">
+										<img class="img" src="../../img/replace/upload.png" />
+										<input id="upload" class="file" type="file" value="" accept="image/*" />
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<style type="text/css">
+					.add-wrapper .btn {
+						color: #fff;
+						background-color: #f96e53;
+					}
+				</style>
+				<a id="submit" href="javascript:;" class="btn btn-primary">提交</a>
+			</div>
+		</div>
+		<script id="tpl_upload" type="text/html">
+			<li class="item">
+				<div class="img-wrap">
+					<img class="img" src="{{src}}" />
+					<span class="close expand"></span>
+				</div>
+			</li>
+		</script>
+		
+		<script type="text/javascript" data-main="../../js/app" src="../../js/require.js" ></script>
+		<script type="text/javascript" src="../../js/app.js" ></script>
+		<script type="text/javascript">
+			requirejs(['jquery', 'lazyload', 'rem', 'tools'],
+				function($, lazyload, rem, t) {
+					var $submit = $('#submit'),
+						$upload = $('#upload'),
+						$piclist = $('#piclist'),
+						count = 0;
+
+						$submit.click(function () {
+							if (!t.validForm('body', 1)) return;
+							t.toast('提交成功！');
+							isConfirm = true;
+							setTimeout(function () {
+								//此处跳转
+								//window.location.href = '';
+							}, 2000)
+						})
+						
+						$upload.change(function () {
+							var fileSize=10*1024*1024;
+							var files = this.files[0];
+							var _this = this;
+							
+							if(!/\.(gif|png|jpeg|JPEG|jpg|GIF|PNG|JPG)$/.test(files.name)){
+					            alert('请从相册选择图片或者直接拍照上传');
+					            source.value = "";
+					            return false;
+					        }
+							
+							if(files.size>fileSize){
+								t.alert({
+									msg: '照片过大，请上传10M以下的照片',
+									icon: true
+								});
+								return false;
+							}
+							
+							var reader = new FileReader();
+							reader.readAsDataURL(files);
+							reader.onload = function (e) {
+								var _html = $('#tpl_upload').html().replace('{{src}}', this.result);
+								$(_this).parents('.item').before($(_html));
+								//上传成功
+								count++;
+								refresh();
+							}
+						})
+						$piclist.delegate('.close', 'click', function () {
+							$(this).parents('.item').remove()
+							count--;
+							refresh();
+						})
+						
+						function refresh() {
+							var $upload = $piclist.find('li.upload')
+							if (count >= 3) $upload.hide()
+							else $upload.show()
+						}
+				});
+		</script>
+	</body>
+</html>

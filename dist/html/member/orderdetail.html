@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../../css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/custom.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/icon.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/public.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/layout.css" />
+		<title>订单详情</title>
+		
+		<style type="text/css">
+			.btn-wrap {
+				padding: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="page">
+			<div class="order-wrapper">
+				<section class="top-wrapper">
+					<div class="order-head-item clearfix">
+						<div class="number fl">订单编号:123456789</div>
+						<div class="price fr">待支付</div>
+					</div>
+					<div class="item">
+						<div class="img">
+							<img class="lazyload" data-original="../../img/replace/图层 898.png" src="../../img/placehold_img.jpg" />
+						</div>
+						<div class="text">
+							<div class="title over_2">榴芒事迹椰子饼厦门鼓浪屿特产手工馅饼烘焙糕点小吃零食伴手礼</div>
+							<section class="clearfix">
+								<div class="price fl"><em>￥</em>64</div>
+								<div class="fr num">x1</div>
+							</section>
+						</div>
+					</div>
+					<div class="item">
+						<div class="img">
+							<img class="lazyload" data-original="../../img/replace/图层 898.png" src="../../img/placehold_img.jpg" />
+						</div>
+						<div class="text">
+							<div class="title over_2">榴芒事迹椰子饼厦门鼓浪屿特产手工馅饼烘焙糕点小吃零食伴手礼榴芒事迹椰子饼厦门鼓浪屿特产手工馅饼烘焙糕点小吃零食伴手礼</div>
+							<section class="clearfix">
+								<div class="price fl"><em>￥</em>64</div>
+								<div class="fr num">x1</div>
+							</section>
+						</div>
+					</div>
+					<div class="total tr">共1件商品 合计：<span class="price">￥192.00</span></div>
+					<div class="btns">
+						<a href="tel:13111111111" class="item gray-border fl">联系商家</a>
+						<div class="fr">
+							<a href="javascript:;" class="item gray-border cancel-hook">取消订单</a>
+							<a href="#" class="item price">立即支付</a>
+						</div>
+					</div>
+				</section>
+				<div class="center-wrapper bgf">
+					<div class="item"><span class="left">收货人:</span><span class="right">灯火阑珊处</span></div>
+					<div class="item"><span class="left">联系电话:</span><span class="right">18317676898</span></div>
+					<div class="item"><span class="left">收货地址:</span><span class="right">广东省深圳市南山区大学城创意园A栋</span></div>
+				</div>
+				<div class="bottom-wrapper center-wrapper bgf">
+					<div class="item" style="border-bottom: 1px solid #e8e8e8;"><span class="left">支付方式:</span>
+						<div class="right clearfix"><span class="fl">微信</span><span class="fr">支付状态：<span class="price">已支付</span></span>
+						</div>
+					</div>
+					<div class="item"><span class="left">商品总额</span><span class="right price tr">￥19888.00</span></div>
+					<div class="item"><span class="left">邮费</span><span class="right tr">满三件享包邮优惠</span></div>
+				</div>
+				<div class="btn-wrap">
+					<a href="#" class="btn btn-primary">我要维权</a>
+				</div>
+			</div>
+		</div>
+		
+		<script type="text/javascript" data-main="../../js/app" src="../../js/require.js" ></script>
+		<script type="text/javascript" src="../../js/app.js" ></script>
+		<script type="text/javascript">
+			requirejs(['jquery', 'lazyload', 'rem', 'tools'],
+				function($, lazyload, rem, t) {
+					t.lazyload('.page');
+					$('.cancel-hook').click(function () {
+						t.alert({
+							msg: '你确定要取消吗？',
+							isConfirm: true,
+							fn: function () {
+								t.toast('取消成功');
+							}
+						});
+					})
+				});
+		</script>
+	</body>
+</html>

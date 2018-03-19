@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../../css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/custom.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/icon.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/public.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/layout.css" />
+		<title>我的收藏</title>
+		<style type="text/css">
+			.page {
+				top: 42px;
+			}
+			.page.bottom {
+				bottom: 44px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="collect-wrapper">
+			<div id="header1" class="header header1">
+				<p class="label fl">您一共收藏了<span id="collect-count">0</span>条信息</p>
+				<a href="javascript:;" class="edit fr">编辑</a>
+			</div>
+			<div id="header2" class="header header2">
+				<p class="text">编辑</p>
+				<a href="javascript:;" class="complete cancel-hook">完成</a>
+			</div>
+		</div>
+		<div class="page">
+			<ul class="collect-wrapper">
+				<li class="item">
+					<i class="check iconfont icon-default-1"></i>
+					<a href="#">
+						<div class="img-wrap">
+							<img src="../../img/replace/shop_img.png"/>
+						</div>
+						<div class="text-wrap">
+							<p class="title">榴芒事迹椰子饼厦门鼓浪屿特产手工馅饼烘焙糕点小吃零食伴手礼</p>
+							<p class="price">￥64</p>
+						</div>
+					</a>
+				</li>
+				<li class="item">
+					<i class="check iconfont icon-default-1"></i>
+					<a href="#">
+						<div class="img-wrap">
+							<img src="../../img/replace/shop_img.png" />
+						</div>
+						<div class="text-wrap">
+							<p class="title">榴芒事迹椰子饼厦门鼓浪屿特产手工馅饼烘焙糕点小吃零食伴手礼</p>
+							<p class="price">￥64</p>
+						</div>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="collect-wrapper">
+			<section class="collect-footer">
+				<a href="javascript:;" class="delete btn delete-hook">删除</a>
+				<a href="javascript:;" class="cancel-hook btn btn-primary">取消</a>
+			</section>
+		</div>
+		
+		<script type="text/javascript" data-main="../../js/app" src="../../js/require.js" ></script>
+		<script type="text/javascript" src="../../js/app.js" ></script>
+		<script type="text/javascript">
+			requirejs(['jquery', 'lazyload', 'rem', 'tools'],
+				function($, lazyload, rem, t) {
+					var $wrapper = $('.collect-wrapper');
+					$wrapper.find('.edit').click(showEdit);
+					$wrapper.find('.cancel-hook').click(hideEdit);
+					$wrapper.delegate('.check', 'click', function () {
+						$(this).parent().toggleClass('active');
+						refresh();
+					});
+					
+					$('.delete-hook').click(function () {
+						if ($(this).hasClass('disabled')) return;
+						t.alert({
+							msg: '你确定要删除吗？',
+							isConfirm: true,
+							fn: function () {
+								t.toast('删除成功');
+							}
+						});
+					})
+					
+					refresh();
+					
+					function showEdit () {
+						$wrapper.addClass('edit');
+						$('.page').addClass('bottom');
+					}
+					
+					function hideEdit () {
+						$wrapper.removeClass('edit');
+						$('.page').removeClass('bottom');
+						$wrapper.find('.item.active').removeClass('active');
+						refresh();
+					}
+					
+					//判断有无选中数据
+					function refresh () {
+						var count = $wrapper.find('.item.active').length;
+						if (count <= 0) {
+							//未选中
+							$('.delete-hook').addClass('disabled');
+						}else {
+							$('.delete-hook').removeClass('disabled');
+						}
+					}
+				});
+		</script>
+	</body>
+</html>

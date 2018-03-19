@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../../css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/custom.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/icon.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/public.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/layout.css" />
+		<title>支付成功</title>
+		
+		<style type="text/css">
+			.page {
+				top: 26px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="paysuccess-notice">恭喜您，支付成功！请完善收货信息以便商家发货~</div>
+		<div class="page bottom">
+			<div class="paysuccess-wrapper">
+				<div class="item">
+					<span class="label">订单号：</span>
+					<span class="text">584621587412541</span>
+				</div>
+				<div class="item">
+					<span class="label">商品名称：</span>
+					<span class="text">传统糕点礼盒手工点心特产糕点</span>
+				</div>
+				<div class="item">
+					<span class="label">地址：</span>
+					<a class="btn-primary button">完善收货地址</a>
+				</div>
+				<div class="item">
+					<span class="label">金额：</span>
+					<span class="text">192元</span>
+				</div>
+				<div class="bg">
+					<div class="content">
+						<img class="img block" src="../../img/paysuccess_img.png"/>
+						<a href="#" class="btn btn-primary">查看更多</a>
+					</div>
+				</div>
+				<a class="question">直购号是什么？</a>
+				<p class="bot">技术支持@百木微风</p>
+			</div>
+		</div>
+		<!--注意： 这里，这里的底部和之前的不一样 -->
+		<footer class="footer">
+			<div class="item">
+				<!--  S 选中 icon-BusinessCenter-  未选中  icon-BusinessCenter--   End-->
+				<i class="iconfont icon-BusinessCenter--"></i>
+				<div class="text">店铺首页</div>
+			</div>
+			<a href="tel:13760212507" class="item">
+				<i class="iconfont icon-Contactthemerchant"></i>
+				<div class="text">联系商家</div>
+			</a>
+			<div class="item">
+				<!--  S 选中 icon-Myorder-  未选中  icon-Myorder--   End-->
+				<i class="iconfont icon-Myorder--"></i>
+				<div class="text">我的订单</div>
+			</div>
+			<div class="item">
+				<!--  S 选中 icon-MemberCenter-  未选中  icon-MemberCenter--   End-->
+				<i class="iconfont icon-MemberCenter--"></i>
+				<div class="text">会员中心</div>
+			</div>
+		</footer>
+		
+		<script type="text/javascript" data-main="../../js/app" src="../../js/require.js" ></script>
+		<script type="text/javascript" src="../../js/app.js" ></script>
+		<script type="text/javascript">
+			requirejs(['jquery', 'lazyload', 'rem', 'tools'],
+				function($, lazyload, rem, tools) {
+					
+				});
+		</script>
+	</body>
+</html>
